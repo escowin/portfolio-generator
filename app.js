@@ -13,35 +13,48 @@ const inquirer = require('inquirer');
 const promptUser = () => {
     return inquirer.prompt([
         {
-            type: 'input',
-            name: 'name',
-            message: 'what is your name? (required)',
-            validate: nameInput => {
-              if (nameInput) {
-                return true;
-              } else {
-                console.log('please enter your name!');
-                return false;
-              }
-            }
+          type: 'input',
+          name: 'name',
+          message: 'what is your name? (required)',
+          validate: nameInput => {
+            if (nameInput) {
+              return true;
+            } else {
+              console.log('please enter your name!');
+              return false;
+            }            
+          }
         },
         {
-            type: 'input',
-            name: 'github',
-            message: 'enter your github username (required)',
-            validate: nameInput => {
-              if (nameInput) {
-                return true;
-              } else {
-                console.log('please enter your github username.');
-                return false;
-              }
+          type: 'input',
+          name: 'github',
+          message: 'enter your github username (required)',
+          validate: nameInput => {
+             if (nameInput) {
+              return true;
+            } else {
+              console.log('please enter your github username.');
+              return false;
             }
+          }
         },
         {
-            type: 'input',
-            name: 'about',
-            message: "provide some information about yourself:"
+          type: 'confirm',
+          name: 'confirmAbout',
+          message: 'would you like to enter some information about yourself for an "about" section?',
+          default: true
+        },
+        {
+          type: 'input',
+          name: 'about',
+          message: "provide some information about yourself:",
+          when: ({ confirmAbout }) => {
+            if (confirmAbout) {
+              return true;
+            } else {
+              return false;
+            }
+          }
         }
     ]);
 };
