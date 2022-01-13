@@ -15,12 +15,28 @@ const promptUser = () => {
         {
             type: 'input',
             name: 'name',
-            message: 'what is your name?'
+            message: 'what is your name? (required)',
+            validate: nameInput => {
+              if (nameInput) {
+                return true;
+              } else {
+                console.log('please enter your name!');
+                return false;
+              }
+            }
         },
         {
             type: 'input',
             name: 'github',
-            message: 'enter your github username'
+            message: 'enter your github username (required)',
+            validate: nameInput => {
+              if (nameInput) {
+                return true;
+              } else {
+                console.log('please enter your github username.');
+                return false;
+              }
+            }
         },
         {
             type: 'input',
@@ -44,12 +60,20 @@ if (!portfolioData.projects) {
     {
       type: 'input',
       name: 'name',
-      message: 'What is the name of your project?'
+      message: 'What is the name of your project? (required)',
+      validate: nameInput => {
+        if (nameInput) {
+          return true;
+        } else {
+          console.log("enter the project's name.");
+          return false;
+        }
+      }
     },
     {
       type: 'input',
       name: 'description',
-      message: 'Provide a description of the project (Required)'
+      message: 'Provide a description of the project (required)'
     },
     {
       type: 'checkbox',
@@ -60,7 +84,15 @@ if (!portfolioData.projects) {
     {
       type: 'input',
       name: 'link',
-      message: 'Enter the GitHub link to your project. (Required)'
+      message: 'Enter the GitHub link to your project. (required)',
+      validate: nameInput => {
+        if (nameInput) {
+          return true;
+        } else {
+          console.log('enter the GitHub link.');
+          return false;
+        }
+      }
     },
     {
       type: 'confirm',
