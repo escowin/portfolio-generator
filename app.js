@@ -73,9 +73,16 @@ const promptProject = portfolioData => {
             message: 'enter another project?',
             default: false
         }
-    ]);
+    ])
+    .then(projectData => {
+      portfolioData.projects.push(projectData);
+      if (projectData.confirmAddProject) {
+        return promptProject(portfolioData);
+      } else {
+        return portfolioData;
+      }
+    });
 };
-
 promptUser()
     .then(promptProject)
     .then(portfolioData => {
