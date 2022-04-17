@@ -1,5 +1,7 @@
 module.exports = templateData => {
-  console.log(templateData);
+  // destructure | projects & about data based on property key names
+  const { projects, about, ...header } = templateData;
+  console.log(header);
 
   return `
   <!DOCTYPE html>
