@@ -28,12 +28,17 @@ const promptUser = () => {
     ]);
 };
 
-const promptProject = () => {
+const promptProject = portfolioData => {
     console.log(`
     ===========
     add project
     ===========
     `);
+
+    // if nonexistent, create projects [] propery
+    if (!portfolioData.projects) {
+        portfolioData.projects = [];
+    }
     return inquirer.prompt([
         {
             type: 'input',
@@ -72,6 +77,7 @@ const promptProject = () => {
 };
 
 promptUser()
-    .then(answers => console.log(answers))
     .then(promptProject)
-    .then(projectAnswers => console.log(projectAnswers));
+    .then(portfolioData => {
+        console.log(portfolioData);
+    });
