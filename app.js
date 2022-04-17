@@ -129,7 +129,7 @@ Add a New Project
 // promptUser()
 //   .then(promptProject)
 //   .then(portfolioData => {
-    // const pageHTML = generatePage(portfolioData);
+//     const pageHTML = generatePage(portfolioData);
 
 //     fs.writeFile('./index.html', pageHTML, err => {
 //       if (err) throw new Error(err);
@@ -182,6 +182,7 @@ const mockData = {
     }
   ]
 };
+
 const pageHTML = generatePage(mockData);
     fs.writeFile('./index.html', pageHTML, err => {
       if (err) throw new Error(err);
