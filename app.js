@@ -10,9 +10,7 @@ const printProfileData = profileDataArr => {
     console.log("=======");
 
     // is the same as this...
-    profileDataArr.forEach((profileItem) => {
-        console.log(profileItem)
-    });
+    profileDataArr.forEach((profileItem) => console.log(profileItem));
 };
 
 printProfileData(profileDataArgs)
