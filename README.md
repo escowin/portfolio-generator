@@ -1,6 +1,12 @@
 # portfolio-generator
 * 09 | Node.js
 
+## instructions
+*   clone repo  |   git clone...
+*   install |   npm i
+*   run | node app
+
+
 <!-- MOCK DATA START
     const mockData = {...};
     const pageHTML = generatePage(mockData);
