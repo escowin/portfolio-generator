@@ -62,6 +62,12 @@ const promptProject = () => {
             message: "feature this project?",
             default: false
         },
+        {
+            type: 'confirm',
+            name: 'confirmAddProject',
+            message: 'enter another project?',
+            default: false
+        }
     ]);
 };
 
