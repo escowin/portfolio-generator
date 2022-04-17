@@ -127,16 +127,16 @@ Add a New Project
 };
 
 // promptUser()
-  // .then(promptProject)
-  // .then(portfolioData => {
+//   .then(promptProject)
+//   .then(portfolioData => {
     // const pageHTML = generatePage(portfolioData);
 
-    // fs.writeFile('./index.html', pageHTML, err => {
-    //   if (err) throw new Error(err);
+//     fs.writeFile('./index.html', pageHTML, err => {
+//       if (err) throw new Error(err);
 
-    //   console.log('Page created! Check out index.html in this directory to see it!');
-    // });
-  // });
+//       console.log('Page created! Check out index.html in this directory to see it!');
+//     });
+//   });
 
 const mockData = {
   name: 'edwin',
@@ -182,5 +182,8 @@ const mockData = {
     }
   ]
 };
-
 const pageHTML = generatePage(mockData);
+    fs.writeFile('./index.html', pageHTML, err => {
+      if (err) throw new Error(err);
+      console.log('index.html populated with mockData');
+    });
