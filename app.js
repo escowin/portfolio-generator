@@ -132,8 +132,8 @@ promptUser()
     console.log(portfolioData);
     // const pageHTML = generatePage(name, github);
     // fs.writeFile('./index.html', pageHTML, err => {
-    //   if (err) throw err;
-    //   console.log('Portfolio complete! Check out index.html to see the output!');
+    //   if (err) throw new Error(err);
+    //   console.log('Page created, open index.html in this directory to view.');
     // });
   });
 
