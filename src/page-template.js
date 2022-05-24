@@ -25,7 +25,7 @@ const generateProjects = projectsArr => {
               <div class="col-12 mb-2 bg-dark text-light p-3">
                 <h3 class="portfolio-item-title text-light">${name}</h3>
                 <h5 class="portfolio-languages">
-                  built with | ${languages.join(', ')}
+                  built with &mdash; ${languages.join(', ')}
                 </h5>
                 <p>${description}</p>
                 <a href="${link}" class="btn"><i class="fab fa-github mr-2"></i>github repo</a>
@@ -41,7 +41,7 @@ const generateProjects = projectsArr => {
               <div class="col-12 col-md-6 mb-2 bg-dark text-light p-3 flex-column">
                 <h3 class="portfolio-item-title text-light">${name}</h3>
                 <h5 class="portfolio-languages">
-                built with | ${languages.join(', ')}
+                built with &mdash; ${languages.join(', ')}
                 </h5>
                 <p>${description}</p>
                 <a href="${link}" class="btn mt-auto"><i class="fab fa-github mr-2"></i>github repo</a>

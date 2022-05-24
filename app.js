@@ -179,9 +179,19 @@ const pageHTML = generatePage(mockData);
 //   .then(portfolioData => {
 //     const pageHTML = generatePage(portfolioData);
 
-    fs.writeFile('./index.html', pageHTML, err => {
-      if (err) throw new Error(err);
+    fs.writeFile('./dist/index.html', pageHTML, err => {
+      if (err) {
+          console.log(err);
+          return;
+      }
+      console.log("portfolio successfully generated.");
 
-      console.log("portfolio succesfully generated, check out /index.html");
+      fs.copyFile('./src/style.css', './dist/style.css', err => {
+          if (err) {
+              console.log(err);
+              return;
+          }
+        console.log("stylesheet successfully copied as well. open '/dist' to view both files.")
+      })
     });
 //   });
