@@ -47,9 +47,9 @@ const promptUser = () => {
 
 const promptProject = (portfolioData) => {
   console.log(`
-    ===========
-    add project
-    ===========
+    =====================
+    add portfolio project
+    =====================
     `);
 
   if (!portfolioData.projects) {
@@ -181,5 +181,7 @@ const pageHTML = generatePage(mockData);
 
     fs.writeFile('./index.html', pageHTML, err => {
       if (err) throw new Error(err);
+
+      console.log("portfolio succesfully generated, check out /index.html");
     });
 //   });
