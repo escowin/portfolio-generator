@@ -1,5 +1,1 @@
 node_modules/
-
-
-# If the node_modules folder was accidentally tracked by git:
-# git rm -r --cached node_modules

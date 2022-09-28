@@ -1,19 +1,22 @@
 {
-  "name": "project",
+  "name": "portfolio-generator",
   "version": "1.0.0",
-  "description": "",
+  "description": "* 09 | Node.js",
   "main": "app.js",
-  "directories": {
-    "lib": "lib"
-  },
   "scripts": {
-    "test": "node ./test/sample.js",
-    "start": "node app.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/escowin/portfolio-generator.git"
+  },
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/escowin/portfolio-generator/issues"
+  },
+  "homepage": "https://github.com/escowin/portfolio-generator#readme",
   "dependencies": {
-    "inquirer": "^7.0.3"
+    "inquirer": "^8.2.4"
   }
 }

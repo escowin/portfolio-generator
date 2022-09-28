@@ -1,4 +1,4 @@
-// create the about section
+// conditionally create an about section if user opts for one
 const generateAbout = aboutText => {
   if (!aboutText) {
     return '';
@@ -6,67 +6,63 @@ const generateAbout = aboutText => {
 
   return `
     <section class="my-3" id="about">
-      <h2 class="text-dark bg-primary p-2 display-inline-block">About Me</h2>
+      <h2 class="text-dark bg-primary p-2 display-inline-block">about me</h2>
       <p>${aboutText}</p>
     </section>
   `;
 };
 
-// create the projects section
+// projects
 const generateProjects = projectsArr => {
   return `
     <section class="my-3" id="portfolio">
-      <h2 class="text-dark bg-primary p-2 display-inline-block">Work</h2>
+      <h2 class="text-dark bg-primary p-2 display-inline-block">work</h2>
       <div class="flex-row justify-space-between">
-      ${projectsArr
-        .filter(({ feature }) => feature)
-        .map(({ name, description, languages, link }) => {
-          return `
-          <div class="col-12 mb-2 bg-dark text-light p-3">
-            <h3 class="portfolio-item-title text-light">${name}</h3>
-            <h5 class="portfolio-languages">
-              Built With:
-              ${languages.map(language => language).join(',')}
-            </h5>
-            <p>${description}</p>
-            <a href="${link}" class="btn"><i class="fab fa-github mr-2"></i>View Project on GitHub</a>
-          </div>
-        `;
-        })
+        ${projectsArr
+          .filter(({ feature }) => feature)
+          .map(({ name, description, languages, link }) => {
+            return `
+              <div class="col-12 mb-2 bg-dark text-light p-3">
+                <h3 class="portfolio-item-title text-light">${name}</h3>
+                <h5 class="portfolio-languages">
+                  built with &mdash; ${languages.join(', ')}
+                </h5>
+                <p>${description}</p>
+                <a href="${link}" class="btn" target="_blank"><i class="fab fa-github mr-2"></i>github repo</a>
+              </div>
+            `;
+          })
         .join('')}
-
-      ${projectsArr
-        .filter(({ feature }) => !feature)
-        .map(({ name, description, languages, link }) => {
-          console.log(languages);
-          return `
-          <div class="col-12 col-md-6 mb-2 bg-dark text-light p-3 flex-column">
-            <h3 class="portfolio-item-title text-light">${name}</h3>
-            <h5 class="portfolio-languages">
-              Built With:
-              ${languages.join(', ')}
-            </h5>
-            <p>${description}</p>
-            <a href="${link}" class="btn mt-auto"><i class="fab fa-github mr-2"></i>View Project on GitHub</a>
-          </div>
-        `;
-        })
+      
+        ${projectsArr
+          .filter(({ feature }) => !feature)
+          .map(({ name, description, languages, link }) => {
+            return `
+              <div class="col-12 col-md-6 mb-2 bg-dark text-light p-3 flex-column">
+                <h3 class="portfolio-item-title text-light">${name}</h3>
+                <h5 class="portfolio-languages">
+                built with &mdash; ${languages.join(', ')}
+                </h5>
+                <p>${description}</p>
+                <a href="${link}" class="btn mt-auto" target="_blank"><i class="fab fa-github mr-2"></i>github repo</a>
+              </div>
+            `;
+          })
         .join('')}
-    
       </div>
-    </section>
+    </section>  
   `;
-};
+}
 
-// export function to generate entire page
+// export 
 module.exports = templateData => {
-  // destructure page data by section
+  // destructure projects and about data from teplateData based on property key names
   const { projects, about, ...header } = templateData;
 
   return `
   <!DOCTYPE html>
   <html lang="en">
-  
+
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -76,22 +72,24 @@ module.exports = templateData => {
     <link href="https://fonts.googleapis.com/css?family=Public+Sans:300i,300,500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
   </head>
-  
+
   <body>
     <header>
       <div class="container flex-row justify-space-between align-center py-3">
         <h1 class="page-title text-secondary bg-dark py-2 px-3">${header.name}</h1>
         <nav class="flex-row">
-          <a class="ml-2 my-1 px-2 py-1 bg-secondary text-dark" href="https://github.com/${header.github}">GitHub</a>
+          <a class="ml-2 my-1 px-2 py-1 bg-secondary text-dark" href="https://github.com/${
+            header.github
+          }" target="_blank">GitHub</a>
         </nav>
       </div>
     </header>
     <main class="container my-5">
-      ${generateAbout(about)}
-      ${generateProjects(projects)}
+          ${generateAbout(about)}
+          ${generateProjects(projects)}
     </main>
     <footer class="container text-center py-3">
-      <h3 class="text-dark">&copy;2020 by ${header.name}</h3>
+      <h3 class="text-dark">&copy; ${new Date().getFullYear()} by ${header.name}</h3>
     </footer>
   </body>
   </html>
