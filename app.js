@@ -74,6 +74,7 @@ const promptProject = portfolioData => {
           console.log("project name is required");
           return false;
         }
+      },
     },
     {
       type: "input",
