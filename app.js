@@ -7,18 +7,47 @@ const promptUser = () => {
     {
       type: "input",
       name: "name",
-      message: "enter name",
+      message: "enter name (required)",
+      validate: nameInput => {
+        if (nameInput) {
+          return true;
+        } else {
+          console.log("entering a name is required");
+          return false;
+        }
+      }
     },
     {
       type: "input",
       name: "github",
       message: "enter github username",
+      validate: githubInput => {
+        if (githubInput) {
+          return true;
+        } else {
+          console.log("your github username is required");
+          return false;
+        }
+      }
+    },
+    {
+      type: 'confirm',
+      name: 'confirmAbout',
+      message: 'add an "about me" section?',
+      default: true
     },
     {
       type: "input",
       name: "about",
       message: "describe yourself",
-    },
+      when: ({ confirmAbout }) => {
+        if (confirmAbout) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+    }
   ]);
 };
 
@@ -38,11 +67,26 @@ const promptProject = portfolioData => {
       type: "input",
       name: "name",
       message: "enter project name",
+      validate: nameInput => {
+        if (nameInput) {
+          return true;
+        } else {
+          console.log("project name is required");
+          return false;
+        }
     },
     {
       type: "input",
       name: "description",
       message: "enter project description (required)",
+      validate: descriptionInput => {
+        if (descriptionInput) {
+          return true;
+        } else {
+          console.log("a description is required");
+          return false;
+        }
+      }
     },
     {
       type: "checkbox",
@@ -62,6 +106,14 @@ const promptProject = portfolioData => {
       type: "input",
       name: "link",
       message: "enter github repo link (required)",
+      validate: linkInput => {
+        if (linkInput) {
+          return true;
+        } else {
+          console.log("a repo link is required");
+          return false;
+        }
+      }
     },
     {
       type: "confirm",
