@@ -1,12 +1,14 @@
-const profileDataArgs = process.argv.slice(2, process.argv.length);
+const fs = require('fs');
+const generatePage = require('./src/page-template')
 
-// arrow functions
-// one parameter | can ommit parentheses
-const printProfileData = profileDataArr => {
-  // print arguments one at a time
-  // refactor | for() loop > .forEach() syntax
-  profileDataArr.forEach(profileItem => console.log(profileItem));
-};
+const profileDataArgs = process.argv.slice(2);
 
+const [name, github] = profileDataArgs;
 
-printProfileData(profileDataArgs)
+// (file name, data being written, callback function to handle errors & success)
+fs.writeFile('index.html', generatePage(name, github), err => {
+  // throw stops code execution
+  if (err) throw err;
+
+  console.log('portfolio complete. check out inde.html to see output.');
+});
