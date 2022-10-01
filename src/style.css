@@ -1,5 +1,5 @@
 :root {
-  --primary: #9dbdc6;
+  --primary: rgba(157, 189, 198, .98);
   --secondary: #daeaef;
   --tertiary: #ff3d2e;
   --light: #ffffff;
@@ -29,7 +29,6 @@ body {
 
 h1,
 h2,
-h3,
 h4,
 h5,
 h6 {
@@ -37,6 +36,13 @@ h6 {
   margin: 5px 0;
   color: var(--dark);
   line-height: 1.25;
+  font-variant: small-caps;
+}
+
+h1,
+h2,
+h3 {
+  letter-spacing: .25rem;
 }
 
 h1 {
@@ -49,6 +55,8 @@ h2 {
 
 h3 {
   font-size: 1.75rem;
+  color: var(--primary);
+  text-shadow: 0 0 1rem 5rem var(--dark);
 }
 
 h4 {
@@ -76,6 +84,7 @@ header {
   background-color: var(--primary);
   position: sticky;
   top: 0;
+  box-shadow: 0 0 2vw 1.5vw var(--dark);
 }
 
 nav {
