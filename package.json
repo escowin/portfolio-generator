@@ -1,7 +1,7 @@
 {
   "name": "portfolio-generator",
   "version": "1.0.0",
-  "description": "* 09 | Node.js",
+  "description": "uses node to generate a portfolio via command line",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -1,68 +1,13 @@
-// conditionally create an about section if user opts for one
-const generateAbout = aboutText => {
-  if (!aboutText) {
-    return '';
-  }
+const generatePage = templateData => {
+  // console.log(templateData);
 
-  return `
-    <section class="my-3" id="about">
-      <h2 class="text-dark bg-primary p-2 display-inline-block">about me</h2>
-      <p>${aboutText}</p>
-    </section>
-  `;
-};
-
-// projects
-const generateProjects = projectsArr => {
-  return `
-    <section class="my-3" id="portfolio">
-      <h2 class="text-dark bg-primary p-2 display-inline-block">work</h2>
-      <div class="flex-row justify-space-between">
-        ${projectsArr
-          .filter(({ feature }) => feature)
-          .map(({ name, description, languages, link }) => {
-            return `
-              <div class="col-12 mb-2 bg-dark text-light p-3">
-                <h3 class="portfolio-item-title text-light">${name}</h3>
-                <h5 class="portfolio-languages">
-                  built with &mdash; ${languages.join(', ')}
-                </h5>
-                <p>${description}</p>
-                <a href="${link}" class="btn" target="_blank"><i class="fab fa-github mr-2"></i>github repo</a>
-              </div>
-            `;
-          })
-        .join('')}
-      
-        ${projectsArr
-          .filter(({ feature }) => !feature)
-          .map(({ name, description, languages, link }) => {
-            return `
-              <div class="col-12 col-md-6 mb-2 bg-dark text-light p-3 flex-column">
-                <h3 class="portfolio-item-title text-light">${name}</h3>
-                <h5 class="portfolio-languages">
-                built with &mdash; ${languages.join(', ')}
-                </h5>
-                <p>${description}</p>
-                <a href="${link}" class="btn mt-auto" target="_blank"><i class="fab fa-github mr-2"></i>github repo</a>
-              </div>
-            `;
-          })
-        .join('')}
-      </div>
-    </section>  
-  `;
-}
-
-// export 
-module.exports = templateData => {
-  // destructure projects and about data from teplateData based on property key names
+  // destructures projects & about data from templateData based on their property key names
   const { projects, about, ...header } = templateData;
+  console.log(projects)
 
   return `
-  <!DOCTYPE html>
-  <html lang="en">
-
+  <!DOCTYPE html> 
+  <html lang="en"> 
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -80,7 +25,7 @@ module.exports = templateData => {
         <nav class="flex-row">
           <a class="ml-2 my-1 px-2 py-1 bg-secondary text-dark" href="https://github.com/${
             header.github
-          }" target="_blank">GitHub</a>
+          }">GitHub</a>
         </nav>
       </div>
     </header>
@@ -95,3 +40,65 @@ module.exports = templateData => {
   </html>
   `;
 };
+
+// about section
+const generateAbout = aboutText => {
+  if (!aboutText) {
+    return "";
+  }
+
+  return `
+    <section class="my-3" id="about">
+      <h2 class="text-dark bg-primary p-2 display-inline-block">about me</h2>
+      <p>${aboutText}</p>
+    </section>
+  `;
+};
+
+// projects section
+const generateProjects = projectsArr => {
+  // filters projectArr for featured projects & maps that data to template literal;
+  // same as above but filters & maps data of non-featured projects 
+  return `
+    <section class="my-3" id="portfolio">
+      <h2 class="text-dark bg-primary p-2 display-inline-block">work</h2>
+      <div class="flex-row justify-space-between">
+      ${projectsArr
+        .filter(({ feature }) => feature)
+        .map(({ name, description, languages, link }) => {
+        return `
+          <div class="col-12 mb-2 bg-dark text-light p-3 flex-column">
+            <h3 class="portfolio-item-title text-light">${name}</h3>
+            <h5 class="portfolio-languages">
+              built with:
+              ${languages.join(', ')}
+            </h5>
+            <p>${description}</p>
+            <a href="${link}" class="btn mt-auto"><i class="fab fa-github mr-2"></i>view project on github</a>
+          </div>
+        `;
+      })
+      .join('')}
+
+      ${projectsArr
+        .filter(({ feature }) => !feature)
+        .map(({ name, description, languages, link}) => {
+          return `
+          <div class="col-12 col-md-6 mb-2 bg-dark text-light p-3 flex-column">
+            <h3 class="portfolio-item-title text-light">${name}</h3>
+            <h5 class="portfolio-languages">
+              built with:
+              ${languages.join(', ')}
+            </h5>
+            <p>${description}</p>
+            <a href="${link}" class="btn mt-auto"><i class="fab fa-github mr-2"></i>view project on github</a>
+          </div>
+        `;
+        })
+      .join('')}
+      </div>
+    </section>
+  `;
+};
+
+module.exports = generatePage;

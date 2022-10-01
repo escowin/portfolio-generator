@@ -1,5 +1,5 @@
-const fs = require('fs');
 const inquirer = require("inquirer");
+const { writeFile, copyFile } = require('./utils/generate-site')
 const generatePage = require('./src/page-template');
 
 const promptUser = () => {
@@ -7,189 +7,161 @@ const promptUser = () => {
     {
       type: "input",
       name: "name",
-      message: "your name (required):",
+      message: "enter name (required)",
       validate: nameInput => {
         if (nameInput) {
           return true;
         } else {
-          console.log("enter your name");
+          console.log("entering a name is required");
           return false;
         }
-      },
+      }
     },
     {
       type: "input",
       name: "github",
-      message: "your github (required):",
+      message: "enter github username",
       validate: githubInput => {
         if (githubInput) {
           return true;
         } else {
-          console.log("enter github username");
+          console.log("your github username is required");
           return false;
         }
-      },
+      }
     },
     {
-      type: "confirm",
-      name: "confirmAbout",
-      message: "add an 'about' section?",
-      default: true,
+      type: 'confirm',
+      name: 'confirmAbout',
+      message: 'add an "about me" section?',
+      default: true
     },
     {
       type: "input",
       name: "about",
-      message: "about you:",
-      when: ({ confirmAbout }) => confirmAbout
-    },
+      message: "describe yourself",
+      when: ({ confirmAbout }) => {
+        if (confirmAbout) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+    }
   ]);
 };
 
-const promptProject = (portfolioData) => {
-  console.log(`
-    =====================
-    add portfolio project
-    =====================
-    `);
-
+const promptProject = portfolioData => {
+  // initializes array only on first pass
   if (!portfolioData.projects) {
     portfolioData.projects = [];
   }
-  return inquirer
-    .prompt([
-      {
-        type: "input",
-        name: "name",
-        message: "project name (required):",
-        validate: nameInput => {
-          if (nameInput) {
-            return true;
-          } else {
-            console.log("enter project name");
-            return false;
-          }
-        },
-      },
-      {
-        type: "input",
-        name: "description",
-        message: "project description (required):",
-        validate: descriptionInput => {
-          if (descriptionInput) {
-            return true;
-          } else {
-            console.log("enter project description");
-            return false;
-          }
-        },
-      },
-      {
-        type: "checkbox",
-        name: "languages",
-        message: "project languages (check all that apply):",
-        choices: ["JavaScript", "HTML", "CSS", "ES6", "jQuery", "Bootstrap", "Node", "React"],
-      },
-      {
-        type: "input",
-        name: "link",
-        message: "github repo (required):",
-        validate: linkInput => {
-          if (linkInput) {
-            return true;
-          } else {
-            console.log("enter github link");
-            return false;
-          }
-        },
-      },
-      {
-        type: "confirm",
-        name: "feature",
-        message: "display as feature project?",
-        default: false,
-      },
-      {
-        type: "confirm",
-        name: "confirmAddProject",
-        message: "add another project?",
-        default: false,
-      },
-    ])
-    .then(projectData => {
-      portfolioData.projects.push(projectData);
-      if (projectData.confirmAddProject) {
-        return promptProject(portfolioData);
-      } else {
-        return portfolioData;
+
+  console.log(`
+  ================
+  adding a project
+  ================
+  `);
+  return inquirer.prompt([
+    {
+      type: "input",
+      name: "name",
+      message: "enter project name",
+      validate: nameInput => {
+        if (nameInput) {
+          return true;
+        } else {
+          console.log("project name is required");
+          return false;
+        }
       }
-    });
+    },
+    {
+      type: "input",
+      name: "description",
+      message: "enter project description (required)",
+      validate: descriptionInput => {
+        if (descriptionInput) {
+          return true;
+        } else {
+          console.log("a description is required");
+          return false;
+        }
+      }
+    },
+    {
+      type: "checkbox",
+      name: "languages",
+      message: "select languages used to build project",
+      choices: [
+        "HTML",
+        "CSS",
+        "Javascript",
+        "ES6",
+        "jQuery",
+        "Bootstrap",
+        "Node",
+      ],
+    },
+    {
+      type: "input",
+      name: "link",
+      message: "enter github repo link (required)",
+      validate: linkInput => {
+        if (linkInput) {
+          return true;
+        } else {
+          console.log("a repo link is required");
+          return false;
+        }
+      }
+    },
+    {
+      type: "confirm",
+      name: "feature",
+      message: "highlight project?",
+      default: false,
+    },
+    {
+      type: "confirm",
+      name: "confirmAddProject",
+      message: "add another project?",
+      default: false,
+    },
+  ])
+  .then(projectData => {
+    portfolioData.projects.push(projectData);
+
+    // if user wants to add another project, callback w/ portfolio data. if not, explicity return data object.
+    if (projectData.confirmAddProject) {
+      return promptProject(portfolioData);
+    } else {
+      return portfolioData;
+    }
+  });
 };
 
-// mock data
-const mockData = {
-    name: 'edwin escobar',
-    github: 'escowin',
-    confirmAbout: true,
-    about:
-      'Duis consectetur nunc nunc. Morbi finibus non sapien nec pharetra. Fusce nec dignissim orci, ac interdum ipsum. Morbi mattis justo sed commodo pellentesque. Nulla eget fringilla nulla. Integer gravida magna mi, id efficitur metus tempus et.',
-    projects: [
-      {
-        name: 'Run Buddy',
-        description:
-          'Duis consectetur nunc nunc. Morbi finibus non sapien nec pharetra. Fusce nec dignissim orci, ac interdum ipsum. Morbi mattis justo sed commodo pellentesque. Nulla eget fringilla nulla. Integer gravida magna mi, id efficitur metus tempus et. Nam fringilla elit dapibus pellentesque cursus.',
-        languages: ['HTML', 'CSS'],
-        link: 'https://github.com/lernantino/run-buddy',
-        feature: true,
-        confirmAddProject: true
-      },
-      {
-        name: 'Taskinator',
-        description:
-          'Duis consectetur nunc nunc. Morbi finibus non sapien nec pharetra. Fusce nec dignissim orci, ac interdum ipsum. Morbi mattis justo sed commodo pellentesque. Nulla eget fringilla nulla. Integer gravida magna mi, id efficitur metus tempus et. Nam fringilla elit dapibus pellentesque cursus.',
-        languages: ['JavaScript', 'HTML', 'CSS'],
-        link: 'https://github.com/lernantino/taskinator',
-        feature: true,
-        confirmAddProject: true
-      },
-      {
-        name: 'Taskmaster Pro',
-        description:
-          'Duis consectetur nunc nunc. Morbi finibus non sapien nec pharetra. Fusce nec dignissim orci, ac interdum ipsum. Morbi mattis justo sed commodo pellentesque. Nulla eget fringilla nulla. Integer gravida magna mi, id efficitur metus tempus et. Nam fringilla elit dapibus pellentesque cursus.',
-        languages: ['JavaScript', 'jQuery', 'CSS', 'HTML', 'Bootstrap'],
-        link: 'https://github.com/lernantino/taskmaster-pro',
-        feature: false,
-        confirmAddProject: true
-      },
-      {
-        name: 'Robot Gladiators',
-        description:
-          'Duis consectetur nunc nunc. Morbi finibus non sapien nec pharetra. Fusce nec dignissim orci, ac interdum ipsum. Morbi mattis justo sed commodo pellentesque.',
-        languages: ['JavaScript'],
-        link: 'https://github.com/lernantino/robot-gladiators',
-        feature: false,
-        confirmAddProject: false
-      }
-    ]
-  };
-
-const pageHTML = generatePage(mockData);
-
 promptUser()
+  // promptProject captures returning data from promptUser(). promptProject is recursively called to add multiple projects. projects pushed in the projects array in the collection of portfolio information. when done, final data set is returned to next then()
   .then(promptProject)
+  // finished portfolio data object returned as portfolioData, sent into generatePage(). that function will return finished html template code into pageHTML
   .then(portfolioData => {
-      return generatePage(portfolioData);
+    return generatePage(portfolioData);
   })
+  // passes pageHTML into writeFile(), which returns a promise (hence using return). the promise is returned into the next then()
   .then(pageHTML => {
-      return fs.writeFile(pageHTML);
+    return writeFile(pageHTML);
   })
+  // upon file creation, the writeFileResponse object (provided by writeFile's resolve()) is logged & copyFile() is returned
   .then(writeFileResponse => {
-      console.log(writeFileResponse);
-      return fs.copyFile();
+    console.log(writeFileResponse);
+    return copyFile();
   })
+  // the promise returned by copyFile() let's user know if css was copied
   .then(copyFileResponse => {
-      console.log(copyFileResponse);
+    console.log(copyFileResponse);
   })
+  // errors are caught
   .catch(err => {
-      console.log(err);
-  })
-;
+    console.log(err);
+  });
