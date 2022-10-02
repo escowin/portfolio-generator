@@ -98,9 +98,11 @@ const promptProject = portfolioData => {
         "CSS",
         "Javascript",
         "ES6",
-        "jQuery",
-        "Bootstrap",
         "Node",
+        "jQuery",
+        "Moment.js",
+        "React.js",
+        "Bootstrap",
       ],
     },
     {
@@ -165,3 +167,4 @@ promptUser()
   .catch(err => {
     console.log(err);
   });
+
