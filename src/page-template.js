@@ -68,8 +68,8 @@ const generateProjects = projectsArr => {
         .map(({ name, description, languages, link }) => {
         return `
           <div class="col-12 mb-2 bg-dark text-light p-3 flex-column">
-            <h3 class="portfolio-item-title text-light">${name}</h3>
-            <h5 class="portfolio-languages">${languages.join(', ')}</h5>
+            <h3 class="portfolio-item-title text-light my-2">${name}</h3>
+            <h5 class="portfolio-languages my-2">${languages.join(', ')}</h5>
             <p>${description}</p>
             <a href="${link}" class="btn mt-auto"><i class="fab fa-github mr-2"></i>view github repo</a>
           </div>
@@ -82,8 +82,8 @@ const generateProjects = projectsArr => {
         .map(({ name, description, languages, link}) => {
           return `
           <div class="col-12 col-md-6 mb-2 bg-dark text-light p-3 flex-column">
-            <h3 class="portfolio-item-title text-light">${name}</h3>
-            <h5 class="portfolio-languages">${languages.join(', ')}</h5>
+            <h3 class="portfolio-item-title text-light my-3">${name}</h3>
+            <h5 class="portfolio-languages my-2">${languages.join(', ')}</h5>
             <p>${description}</p>
             <a href="${link}" class="btn mt-auto"><i class="fab fa-github mr-2"></i>view github repo</a>
           </div>

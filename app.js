@@ -178,6 +178,15 @@ const mockData = {
     'Duis consectetur nunc nunc. Morbi finibus non sapien nec pharetra. Fusce nec dignissim orci, ac interdum ipsum. Morbi mattis justo sed commodo pellentesque. Nulla eget fringilla nulla. Integer gravida magna mi, id efficitur metus tempus et.',
   projects: [
     {
+      name: 'Portfolio generator',
+      description:
+        'Duis consectetur nunc nunc. Morbi finibus non sapien nec pharetra. Fusce nec dignissim orci, ac interdum ipsum. Morbi mattis justo sed commodo pellentesque. Nulla eget fringilla nulla. Integer gravida magna mi, id efficitur metus tempus et. Nam fringilla elit dapibus pellentesque cursus.',
+      languages: ['Javascript', 'ES6', 'Node'],
+      link: 'https://github.com/escowin/portfolio-generator',
+      feature: true,
+      confirmAddProject: true
+    },
+    {
       name: 'Bluestrawberry',
       description:
         'Duis consectetur nunc nunc. Morbi finibus non sapien nec pharetra. Fusce nec dignissim orci, ac interdum ipsum. Morbi mattis justo sed commodo pellentesque. Nulla eget fringilla nulla. Integer gravida magna mi, id efficitur metus tempus et. Nam fringilla elit dapibus pellentesque cursus.',
@@ -192,15 +201,6 @@ const mockData = {
         'Duis consectetur nunc nunc. Morbi finibus non sapien nec pharetra. Fusce nec dignissim orci, ac interdum ipsum. Morbi mattis justo sed commodo pellentesque. Nulla eget fringilla nulla. Integer gravida magna mi, id efficitur metus tempus et. Nam fringilla elit dapibus pellentesque cursus.',
       languages: ['HTML', 'CSS', 'JavaScript', 'jQuery'],
       link: 'https://github.com/escowin/escowinart',
-      feature: true,
-      confirmAddProject: true
-    },
-    {
-      name: 'Solar weather',
-      description:
-        'Duis consectetur nunc nunc. Morbi finibus non sapien nec pharetra. Fusce nec dignissim orci, ac interdum ipsum. Morbi mattis justo sed commodo pellentesque. Nulla eget fringilla nulla. Integer gravida magna mi, id efficitur metus tempus et. Nam fringilla elit dapibus pellentesque cursus.',
-      languages: ['HTML', 'CSS', 'JavaScript', 'ES6', 'jQuery', 'Moment.js'],
-      link: 'https://github.com/escowin/solar-weather-app',
       feature: false,
       confirmAddProject: true
     },
@@ -208,8 +208,8 @@ const mockData = {
       name: 'Portfolio generator',
       description:
         'Duis consectetur nunc nunc. Morbi finibus non sapien nec pharetra. Fusce nec dignissim orci, ac interdum ipsum. Morbi mattis justo sed commodo pellentesque.',
-      languages: ['Javascript', 'ES6', 'Node'],
-      link: 'https://github.com/escowin/portfolio-generator',
+      languages: ['HTML', 'CSS', 'JavaScript', 'ES6', 'jQuery', 'Moment.js'],
+      link: 'https://github.com/escowin/solar-weather-app',
       feature: false,
       confirmAddProject: false
     }

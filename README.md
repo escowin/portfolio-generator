@@ -37,9 +37,9 @@
 
 ## Screenshots
 
-![desktop]()
-![tablet]()
-![mobile]()
+![desktop](./src/images/screenshot-desktop.jpg)
+![tablet](./src/images/screenshot-tablet.jpg)
+![mobile](./src/images/screenshot-tablet.jpg)
 
 ## Author
 
